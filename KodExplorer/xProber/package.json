@@ -1,0 +1,32 @@
+{
+    "id": "xProber",
+    "name": "{{LNG.xProber.meta.name}}",
+    "title": "{{LNG.xProber.meta.title}}",
+    "version": "2.4.2",
+    "source": {
+        "thumb": "",
+        "icon": "{{pluginHost}}static/icon.png",
+        "screenshoot": ["{{pluginHost}}static/screenshot.png"]
+    },
+    "category": "tools,safe",
+    "description": "{{LNG.xProber.meta.desc}}",
+    "keywords": "",
+    "auther": {
+        "copyright": "INN STUDIO",
+        "homePage": "https://github.com/kmvan/x-prober"
+    },
+    "configItem": {
+        "pluginAuth": {
+            "type": "userSelect",
+            "value": "role:1",
+            "display": "{{LNG.Plugin.config.auth}}",
+            "desc": "{{LNG.Plugin.config.authDesc}}",
+            "require": 1
+        },
+        "menuSubMenu": {
+            "type": "switch",
+            "value": 1,
+            "display": "{{LNG.menu_sub_menu}}"
+        }
+    }
+}

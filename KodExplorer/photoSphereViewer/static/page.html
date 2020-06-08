@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <title><?php echo $fileName . ' - ' . LNG('kod_name') . LNG('kod_power_by'); ?></title>
+    
+    <!--[if lt IE 9]>
+    <script src="<?php echo $this->pluginHost;?>static/js/html5shiv.js"></script>
+    <script src="<?php echo $this->pluginHost;?>static/js/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" href="<?php echo $this->pluginHost;?>static/css/photo-sphere-viewer.min.css">
+    <script src="<?php echo $this->pluginHost;?>static/js/three.min.js"></script>
+    <script src="<?php echo $this->pluginHost;?>static/js/polyfill.min.js"></script>
+    <script src="<?php echo $this->pluginHost;?>static/js/doT.min.js"></script>
+    <script src="<?php echo $this->pluginHost;?>static/js/uevent.min.js"></script>
+    <script src="<?php echo $this->pluginHost;?>static/js/photo-sphere-viewer.min.js"></script>
+    
+    <style>
+    html, body, #viewer {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+</head>
+<body>
+    <div id="viewer"></div>
+    <script>
+    const viewer = new PhotoSphereViewer({
+        panorama: "<?php echo $fileUrl; ?>",
+        container: "viewer",
+        caption: "<?php echo $fileName; ?>",
+        loading_img: "<?php echo $this->pluginHost;?>static/images/loading.gif",
+        navbar: "autorotate zoom download caption fullscreen",
+        lang: {
+            autorotate: "<?php echo LNG('photoSphereViewer.page.navbar.autorotate'); ?>",
+            zoom: "<?php echo LNG('photoSphereViewer.page.navbar.zoom'); ?>",
+            zoomOut: "<?php echo LNG('photoSphereViewer.page.navbar.zoomOut'); ?>",
+            zoomIn: "<?php echo LNG('photoSphereViewer.page.navbar.zoomIn'); ?>",
+            download: "<?php echo LNG('photoSphereViewer.page.navbar.download'); ?>",
+            fullscreen: "<?php echo LNG('photoSphereViewer.page.navbar.fullscreen'); ?>",
+            markers: "<?php echo LNG('photoSphereViewer.page.navbar.markers'); ?>",
+            gyroscope: "<?php echo LNG('photoSphereViewer.page.navbar.gyroscope'); ?>",
+            stereo: "<?php echo LNG('photoSphereViewer.page.navbar.stereo'); ?>",
+            stereo_notification: "<?php echo LNG('photoSphereViewer.page.navbar.stereo_notification'); ?>",
+            please_rotate: ["<?php echo LNG('photoSphereViewer.page.navbar.please_rotate')[0]; ?>", "<?php echo LNG('photoSphereViewer.page.navbar.please_rotate')[1]; ?>"],
+            two_fingers: ["<?php echo LNG('photoSphereViewer.page.navbar.two_fingers')[0]; ?>"]
+        }
+    });
+    </script>
+</body>
+</html>

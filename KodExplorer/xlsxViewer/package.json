@@ -1,0 +1,53 @@
+{
+	"id": "xlsxViewer",
+	"name": "{{LNG.xlsxViewer.meta.name}}",
+	"title": "{{LNG.xlsxViewer.meta.title}}",
+	"version": "1.0",
+	"category": "file",
+	"source": {
+		"icon": "{{pluginHost}}static/images/icon.png"
+	},
+	"description": "{{LNG.xlsxViewer.meta.desc}}",
+	"auther": {
+		"copyright": "mengkun",
+		"homePage": "https://mkblog.cn"
+	},
+	"configItem": {
+		"formStyle": {
+			"className": "form-box-title-left",
+			"tabs": [{
+				"name": "{{LNG.Plugin.tab.basic}}",
+				"field": ["pluginAuth", "pluginAuthOpen", "sep001", "openWith"]
+			}]
+		},
+		"pluginAuth": {
+			"type": "userSelect",
+			"value": "all:1",
+			"display": "{{LNG.Plugin.config.auth}}",
+			"desc": "{{LNG.Plugin.config.authDesc}}",
+			"require": 1
+		},
+		"sep001": "<hr/>",
+		"openWith": {
+			"type": "radio",
+			"value": "dialog",
+			"display": "{{LNG.Plugin.Config.openWith}}",
+			"info": [
+				["dialog", "{{LNG.Plugin.Config.openWithDilog}}"],
+				["window", "{{LNG.Plugin.Config.openWithWindow}}"]
+			]
+		},
+		"fileExt": {
+			"type": "tags",
+			"display": "{{LNG.Plugin.Config.fileExt}}",
+			"desc": "{{LNG.Plugin.Config.fileExtDesc}}",
+			"value": "xls,xlsx,xlsb,ods,csv,fods,csv"
+		},
+		"fileSort": {
+			"type": "number",
+			"display": "{{LNG.Plugin.Config.fileSort}}",
+			"desc": "{{LNG.Plugin.Config.fileSortDesc}}",
+			"value": 10
+		}
+	}
+}
