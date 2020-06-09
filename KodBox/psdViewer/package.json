@@ -1,0 +1,37 @@
+{
+    "id": "psdViewer",
+    "name": "{{LNG['psdViewer.meta.name']}}",
+    "title": "{{LNG['psdViewer.meta.title']}}",
+    "version": "1.0",
+    "category": "file,tools",
+    "source": {
+        "icon": "{{pluginHost}}static/images/icon.png"
+    },
+    "description": "{{LNG['psdViewer.meta.desc']}}",
+    "auther": {
+        "copyright": "mengkun",
+        "homePage": "https://mkblog.cn"
+    },
+    "configItem": {
+        "pluginAuth": {
+            "type": "userSelect",
+            "value": "all:1",
+            "display": "{{LNG['Plugin.config.auth']}}",
+            "desc": "{{LNG['Plugin.config.authDesc']}}",
+            "require": 1
+        },
+        
+		"fileExt": {
+			"type": "tags",
+			"display": "{{LNG['Plugin.Config.fileExt']}}",
+			"desc": "{{LNG['Plugin.Config.fileExtDesc']}}",
+			"value": "psd"
+		},
+		"fileSort": {
+			"type": "number",
+			"display": "{{LNG['Plugin.Config.fileSort']}}",
+			"desc": "{{LNG['Plugin.Config.fileSortDesc']}}",
+			"value": 100
+		}
+    }
+}
