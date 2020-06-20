@@ -92,6 +92,7 @@ kodReady.push(function() {
     
     // 载入菜单
     function loadMenu(menu, menuType) {
+        // 菜单尚未初始化则初始化
         if(!menu.PsdViewer) {
             $.contextMenu.menuAdd(contextMenuOptions, menu, ".open-with", false);
             menu.PsdViewer = true;
@@ -101,6 +102,7 @@ kodReady.push(function() {
           ext = pathTools.pathExt(name),
           allowExt = $.inArray(ext, ("{{config.fileExt}}").split(","));
         
+        // 非支持的格式，隐藏扩展菜单
         if (allowExt == -1) {
             $.contextMenu.menuItemHide(menu, "psdViewerTool");
         } else {
