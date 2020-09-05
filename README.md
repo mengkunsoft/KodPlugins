@@ -37,6 +37,9 @@ XLSX(Excel) 文件预览插件  http://bbs.kodcloud.com/d/392
 
 
 ## 相关插件仓库
+
+第三方插件收藏
+
 | 仓库地址 | 仓库作者 | 包含的插件 |
 |--|--|--|
 | https://github.com/zhtengw/kodexplorer-plugins | Aten Zhang | Office 编辑、PDF 编辑、流程图编辑、图像编辑、CAD 看图等 |
@@ -44,11 +47,12 @@ XLSX(Excel) 文件预览插件  http://bbs.kodcloud.com/d/392
 | https://github.com/hiteochew/kodexplorer-plugins-meituxiuxiu | hiteochew | 美图秀秀 |
 | https://github.com/hiteochew/kodexplorer-plugins-zoho | hiteochew | Office 编辑 |
 | https://github.com/cngege/KodNES | cngege | NES 模拟器（KodBox 版） |
-| https://github.com/meepiquitous/KodExplorer-NES-emulator-plugin | meepiquitous | NES 模拟器 |
+| https://github.com/nathalis/KodExplorer-NES-emulator-plugin | nathalis | NES 模拟器 |
+| https://github.com/nathalis/KodExplorer-uPLAYER-media-plugin | nathalis | uPLAYER 媒体播放器 |
+| https://github.com/nathalis/KodExplorer-custom-desktop | nathalis | 仅支持 `KodExplorer 4.4`! 将桌面修改为自由桌面 |
 | https://github.com/paulhybryant/kodexplorer-plugins-naotu | paulhybryant | 百度脑图 |
+| https://github.com/venlentine/torrentView | venlentine | torrent 种子信息查看器 |
 | https://github.com/paulhybryant/kodexplorer-plugins-doc2pdf | paulhybryant | 转换 doc 文件为 pdf（需配置好`openOffice`） |
-
-
 
 ## 官方链接
 
