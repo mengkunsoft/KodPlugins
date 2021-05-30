@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <title><?php echo $fileName . ' - ' . LNG('common.copyright.name') . LNG('common.copyright.powerBy'); ?></title>
+    
+    <meta itemprop="image" content="<?php echo $this->pluginHost;?>static/images/icon.png" />
+	<link href="<?php echo $this->pluginHost;?>static/images/icon.png" rel="Shortcut Icon" type="image/x-icon">
+	<link href="<?php echo $this->pluginHost;?>static/images/icon.png" rel="icon" type="image/x-icon">
+    
+    <script src="<?php echo $this->pluginHost;?>static/js/mammoth.browser.min.js"></script>
+    <link rel="stylesheet" href="<?php echo $this->pluginHost;?>static/css/typo.css?v=1" type="text/css" />
+    
+    <style>
+    html, body, div {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html, body, #viewer {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    body {
+        background-color: #f8f8f8;
+    }
+    img {
+        max-width: 100%;
+    }
+    
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        display: block;
+        max-width: 100%;
+        overflow: auto;
+        word-break: normal;
+        word-break: keep-all;
+        margin-bottom: 8px;
+    }
+    table td, table th {
+        padding: 6px 13px;
+        border: 1px solid #ddd;
+        line-height: 1.6;
+    }
+    table thead tr, table thead tr {
+        background-color: #F8F8F8;
+    }
+    table tr {
+        background-color: #fff;
+        border-top: 1px solid #ccc;
+    }
+    table tr:nth-child(2n) {
+        background-color: #f8f8f8;
+    }
+    
+    /* init */
+    #viewer-tips {
+        font-size: 20px;
+        color: #929292;
+        line-height: 80px;
+        width: 200px;
+        height: 80px;
+        margin: 0 auto;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        -webkit-transform: translateY(-50%);
+           -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+             -o-transform: translateY(-50%);
+                transform: translateY(-50%);
+    }
+    .sheet-loading {
+        width: 45px;
+        height: 45px;
+        display: inline-block;
+        padding: 0px;
+        border-radius: 100%;
+        border: 5px solid;
+        border-top-color: #0188fb;
+        border-bottom-color: #eee;
+        border-left-color: #0188fb;
+        border-right-color: #eee;
+        -webkit-animation: sheet-loading 1s linear infinite;
+                animation: sheet-loading 1s linear infinite;
+    }
+    @keyframes sheet-loading {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+    }
+    @-webkit-keyframes sheet-loading {
+        from {-webkit-transform: rotate(0deg);}
+        to {-webkit-transform: rotate(360deg);}
+    }
+    
+    .doc-container {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background: #f9fafb;
+    }
+    .doc-page {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 15px 40px;
+        background: #fff;
+        box-shadow: rgb(0 0 0 / 6%) 0px 0px 10px 0px, rgb(0 0 0 / 4%) 0px 0px 0px 1px;
+    }
+    </style>
+</head>
+<body>
+    <div id="viewer">
+        <div id="viewer-tips">
+            <div class="sheet-loading"></div>
+        </div>
+    </div>
+    
+    <script>
+    function displayResult(result) {
+        let html = result.value;
+        let messages = result.messages;
+        let newHTML = '<div class="doc-container"><div class="doc-page">' + html + '</div></div>';
+        document.getElementById("viewer").innerHTML = newHTML;
+    }
+    
+    try {
+        var xhr = new XMLHttpRequest();
+        xhr.open(
+            "GET",
+            `<?php echo $fileUrl; ?>`
+        );
+        xhr.responseType = "arraybuffer";
+        xhr.onload = function (e) {
+            let content = xhr.response;
+            let blob = new Blob([content], { type: "application/msword" });
+            
+            let reader = new FileReader();
+            reader.readAsArrayBuffer(blob);
+            reader.onload = function (loadEvent) {
+                var arrayBuffer = xhr.response;
+                
+                mammoth
+                .convertToHtml({ arrayBuffer: arrayBuffer })
+                .then(displayResult)
+                .done();
+            };
+        };
+        xhr.send();
+    } catch (e) {
+        document.getElementById('viewer-tips').innerHTML = 'Load failure!';
+    }
+    </script>
+</body>
+</html>

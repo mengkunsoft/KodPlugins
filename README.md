@@ -1,8 +1,6 @@
 # KodPlugins
 
-自制的可道云插件，部分插件暂未支持新版的 `KodBox`，正在迁移中。
-
-
+可道云插件收藏
 
 ## 插件安装方法
 
@@ -11,6 +9,9 @@
 
 
 ## 插件列表
+
+以下是自制的可道云插件，部分插件暂未支持新版的 `KodBox`，正在迁移中。
+
 
 ### photoSphereViewer ![](https://img.shields.io/badge/KodBox-%E2%88%9A-brightgreen) ![](https://img.shields.io/badge/KodExplorer-%E2%88%9A-brightgreen)
 
@@ -24,9 +25,15 @@ PSD 文件预览插件  http://bbs.kodcloud.com/d/72
 
 
 
-### xlsxViewer ![](https://img.shields.io/badge/kodBox-%C3%97-red) ![](https://img.shields.io/badge/KodExplorer-%E2%88%9A-brightgreen)
+### xlsxViewer ![](https://img.shields.io/badge/KodBox-%E2%88%9A-brightgreen) ![](https://img.shields.io/badge/KodExplorer-%E2%88%9A-brightgreen)
 
 XLSX(Excel) 文件预览插件  http://bbs.kodcloud.com/d/392
+
+
+
+### docxViewer ![](https://img.shields.io/badge/KodBox-%E2%88%9A-brightgreen) ![](https://img.shields.io/badge/KodExplorer-%E2%88%9A-brightgreen)
+
+DOCX(Word) 文件预览插件
 
 
 
@@ -38,7 +45,7 @@ XLSX(Excel) 文件预览插件  http://bbs.kodcloud.com/d/392
 
 ## 相关插件仓库
 
-第三方插件收藏
+以下是其它的第三方插件收藏
 
 | 仓库地址 | 仓库作者 | 包含的插件 |
 |--|--|--|

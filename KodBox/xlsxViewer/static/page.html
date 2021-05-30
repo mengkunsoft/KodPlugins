@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <title><?php echo $fileName . ' - ' . LNG('common.copyright.name') . LNG('common.copyright.powerBy'); ?></title>
+    <meta itemprop="image" content="<?php echo $this->pluginHost;?>static/images/icon.png" />
+	<link href="<?php echo $this->pluginHost;?>static/images/icon.png" rel="Shortcut Icon" type="image/x-icon">
+	<link href="<?php echo $this->pluginHost;?>static/images/icon.png" rel="icon" type="image/x-icon">
+    
+    <script src="<?php echo $this->pluginHost;?>static/js/jexcel.js"></script>
+    <link rel="stylesheet" href="<?php echo $this->pluginHost;?>static/css/jexcel.css" type="text/css" />
+    <script src="<?php echo $this->pluginHost;?>static/js/jsuites.js"></script>
+    <link rel="stylesheet" href="<?php echo $this->pluginHost;?>static/css/jsuites.css" type="text/css" />
+
+    <script src="<?php echo $this->pluginHost;?>static/js/jszip.js"></script>
+    <script src="<?php echo $this->pluginHost;?>static/js/xlsx.js"></script>
+    
+    <style>
+    html, body, #viewer {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    body {
+        background-color: #f8f8f8;
+    }
+    
+    /* init */
+    #viewer-tips {
+        font-size: 20px;
+        color: #929292;
+        line-height: 80px;
+        width: 200px;
+        height: 80px;
+        margin: 0 auto;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        -webkit-transform: translateY(-50%);
+           -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+             -o-transform: translateY(-50%);
+                transform: translateY(-50%);
+    }
+    .sheet-loading {
+        width: 45px;
+        height: 45px;
+        display: inline-block;
+        padding: 0px;
+        border-radius: 100%;
+        border: 5px solid;
+        border-top-color: #0188fb;
+        border-bottom-color: #eee;
+        border-left-color: #0188fb;
+        border-right-color: #eee;
+        -webkit-animation: sheet-loading 1s linear infinite;
+                animation: sheet-loading 1s linear infinite;
+    }
+    @keyframes sheet-loading {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+    }
+    @-webkit-keyframes sheet-loading {
+        from {-webkit-transform: rotate(0deg);}
+        to {-webkit-transform: rotate(360deg);}
+    }
+    
+    .jexcel_container {
+        overflow: auto;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 32px;
+    }
+    .jexcel .highlight-top.highlight-left {
+        box-shadow: -1px -1px #0188fb;
+        -webkit-box-shadow: -1px -1px #0188fb;
+        -moz-box-shadow: -1px -1px #0188fb;
+    }
+    .jexcel .highlight-bottom {
+        border-bottom: 1px solid #0188fb;
+        box-shadow: 0px 1px #0188fb;
+    }
+    .jexcel .highlight-right {
+        border-right: 1px solid #0188fb;
+        box-shadow: 1px 0px #0188fb;
+    }
+    .jexcel .highlight-left {
+        border-left: 1px solid #0188fb;
+        box-shadow: -1px 0px #0188fb;
+    }
+    .jexcel .highlight-top {
+        border-top: 1px solid #0188fb;
+        box-shadow: 0px -1px #0188fb;
+    }
+    .jexcel_corner {
+        background-color: #0188fb;
+        height: 5px;
+        width: 5px;
+        border: 2px solid rgb(255, 255, 255);
+        right: -4.5px;
+        bottom: -4.5px;
+        padding: 0;
+    }
+    .jexcel .highlight {
+        background-color: rgba(1, 136, 251, 0.1);
+    }
+    
+    /* tabs */
+    .sheet-item {
+        display:none;
+    }
+    .tabs-bar {
+        position: fixed;
+        left: 0; right: 0;
+        bottom: 0; height: 32px;
+        border-top: 1px solid #E0E0E0;
+        border-bottom: 1px solid #E0E0E0;
+        box-sizing: border-box; 
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .tabs-bar:hover {
+        overflow-x: auto;
+    }
+    .sheet-tab {
+        display: inline-block;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: #000c;
+        background-color: #F0F0F0;
+        cursor: pointer;
+        height: 100%;
+        line-height: 32px;
+        font-size: 14px;
+        border-right: 1px solid #dadbda;
+        user-select: none;
+    }
+    .sheet-tab:hover {
+        background: #E0E0E0;
+    }
+    .sheet-tab.selected {
+        background-color:#fff;
+        cursor: default;
+    }
+    </style>
+</head>
+<body>
+    <div id="viewer">
+        <div id="viewer-tips">
+            <div class="sheet-loading"></div>
+        </div>
+    </div>
+    
+    <script>
+    try {
+        jexcel.fromSpreadsheet('<?php echo $fileUrl; ?>', function(result) {
+            if (!result.length) {
+                document.getElementById('viewer-tips').innerHTML = 'Load failure!';
+            } else {
+                createTabs(document.getElementById('viewer'), result);
+            }
+        });
+    } catch (e) {
+        
+    }
+    
+    /**
+     * 组件内自带的函数有点小问题，因此这里重写一下
+     */
+    window.createTabs = function(tabs, result) {
+        /* Create tab container */ 
+        tabs.innerHTML = '';
+        var tabsDiv = document.createElement('div');
+        var spreadsheet = []
+        var link = [];
+        for (var i = 0; i < result.length; i++) {
+            /* Spreadsheet container */ 
+            spreadsheet[i] = document.createElement('div');
+            spreadsheet[i].classList.add('sheet-item');
+            /* Tab link */ 
+            link[i] = document.createElement('div');
+            link[i].classList.add('sheet-tab');
+            link[i].setAttribute('data-spreadsheet', i);
+            link[i].innerHTML = result[i].sheetName;
+            link[i].onclick = function() {
+                for (var j = 0; j < spreadsheet.length; j++) {
+                    spreadsheet[j].style.display = 'none';
+                    link[j].classList.remove('selected');
+                }
+                var i = this.getAttribute('data-spreadsheet');
+                spreadsheet[i].style.display = 'block';
+                link[i].classList.add('selected')
+            }
+            tabsDiv.appendChild(link[i]);
+        }
+    
+        /* Append spreadsheet */ 
+        for (var i = 0; i < spreadsheet.length; i++) {
+            tabs.appendChild(spreadsheet[i]);
+            jexcel(spreadsheet[i], result[i]);
+        }
+        tabsDiv.classList.add('tabs-bar');
+        tabs.appendChild(tabsDiv);
+        
+        /* First tab */ 
+        spreadsheet[0].style.display = 'block';
+        link[0].classList.add('selected')
+    }
+    </script>
+</body>
+</html>
